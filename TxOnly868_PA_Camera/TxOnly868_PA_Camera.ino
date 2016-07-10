@@ -45,7 +45,6 @@ void loop(){
   
   if((radio.rfm_status ==0)) {
      RFMLib::Packet p;
-
     if(jpglen == 0) {
       fileCount++;
       packetSeq = 0;
@@ -61,6 +60,8 @@ void loop(){
     uint8_t *buffer;
     uint8_t bytesToRead = min(32, jpglen); // change 32 to 64 for a speedup but may not work with all setups!
     buffer = cam.readPicture(bytesToRead);
+        digitalWrite(PA_EN, HIGH);
+
     for(int i = 0; i < bytesToRead; i++) {
       p.data[i+4] = buffer[i];
     }
