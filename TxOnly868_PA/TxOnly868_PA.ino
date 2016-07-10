@@ -16,7 +16,7 @@ void setup(){
   SPI.begin();
   Serial.begin(38400);
   Serial.println("Starting");
-  byte my_config[6] = {0x84,0x84,0x85,0xAC,0xCD, 0x08};
+  byte my_config[6] = {0x54,0xB4,0x85,0xAC,0xCD, 0x08};
   radio.high_frequency = 1;
   radio.configure(my_config);
   radio.setFrequency(869525000);
