@@ -29,6 +29,12 @@ void loop(){
      Serial.print("  ");
    }
    Serial.println();
+   Serial.print("RSSI = ");
+   Serial.print(rx.rssi);
+   Serial.println("dBm");
+   Serial.print("SNR = ");
+   Serial.print(rx.snr);
+   Serial.println("dB");
   }
   
 }
