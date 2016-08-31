@@ -47,6 +47,9 @@ void loop() {
     if (jpglen == 0) {
       fileCount++;
       packetSeq = 0;
+      cam.setImageSize(VC0706_160x120);
+      cam.resumeVideo();
+      delay(5000);
       cam.takePicture();
       jpglen = cam.frameLength();
     }
