@@ -4,8 +4,10 @@ f = None
 ser = serial.Serial('/dev/ttyACM0',115200,timeout=1800000)
 curPacket = -1
 fileTimestamp = ""
+logf = open("log_" + time.strftime("%Y%m%d_%H%M%S") + ".txt", 'w')
 while True:
     line = ser.readline().decode("utf-8")
+    logf.write(line + "\n")
     splitline = line.split("  ")
     if len(splitline) > 4:
         integers = [int(x.strip()) for x in splitline[:-1]]
@@ -24,6 +26,7 @@ while True:
                         print("Warning: tx reset")
                     else:
                         print("File number did not increase sequentially - likely bad packet or tx failure")
+                        f.write(bytearray(32))
                         #sys.exit(1)
                         continue
             fileTimestamp = time.strftime("%Y%m%d_%H%M%S")

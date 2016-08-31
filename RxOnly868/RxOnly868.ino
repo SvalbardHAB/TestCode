@@ -8,7 +8,7 @@ void setup() {
 
   SPI.setModule(2);
   SPI.begin();
-  byte my_config[6] = {0x84, 0x84, 0x85, 0xAC, 0xCD, 0x00};
+  byte my_config[6] = {0x88, 0x84, 0x85, 0xAC, 0xCD, 0x00};
   radio.high_frequency = true;
   radio.configure(my_config);
   radio.setFrequency(869525000);
