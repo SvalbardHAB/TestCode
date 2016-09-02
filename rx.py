@@ -3,7 +3,7 @@ curFile = -1
 f = None
 ser = serial.Serial('/dev/ttyACM0',115200,timeout=1800000)
 curPacket = -1
-fileTimestamp = ""
+fileTimestamp = time.strftime("%Y%m%d_%H%M%S")
 logf = open("log_" + time.strftime("%Y%m%d_%H%M%S") + ".txt", 'w')
 while True:
     line = ser.readline().decode("utf-8")
@@ -25,9 +25,12 @@ while True:
                     if fileno == 0:
                         print("Warning: tx reset")
                     else:
-                        print("File number did not increase sequentially - likely bad packet or tx failure")
+                        print("File number did not increase sequentially - likely bad packet or tx failure. Resetting")
                         f.write(bytearray(32))
-                        #sys.exit(1)
+                        f.close()
+                        curFile = -1
+                        curPacket = -1
+                        fileTimestamp = ""
                         continue
             fileTimestamp = time.strftime("%Y%m%d_%H%M%S")
             f = open(fileTimestamp + "_" + str(fileno) + ".jpg","wb")
