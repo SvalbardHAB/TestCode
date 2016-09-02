@@ -1,13 +1,23 @@
 import serial, sys, time
+#You wil need to change the below line based on your OS and base station device
+serialPort = "/dev/ttyACM0"
+#------------------------------------------------------------------------------
 curFile = -1
 f = None
-ser = serial.Serial('/dev/ttyACM0',115200,timeout=1800000)
+print("LoRa Image RX Utility v1.0")
+print("Starting using serial device " + serialPort)
+print("If you experience a error after this message; check the port name is correct and try restarting the application as root/admin")
+ser = serial.Serial(serialPort,115200,timeout=1800000)
+print("Serial port opened successfully")
 curPacket = -1
 fileTimestamp = time.strftime("%Y%m%d_%H%M%S")
-logf = open("log_" + time.strftime("%Y%m%d_%H%M%S") + ".txt", 'w')
+logFileName = "log_" + time.strftime("%Y%m%d_%H%M%S") + ".txt"
+logf = open(logFileName, 'w')
+print("Logging raw packets to " + logFileName + ", please retain this file for future reference")
+print("-----------------------")
 while True:
     line = ser.readline().decode("utf-8")
-    logf.write(line + "\n")
+    logf.write(line)
     splitline = line.split("  ")
     if len(splitline) > 4:
         integers = [int(x.strip()) for x in splitline[:-1]]
