@@ -1,7 +1,5 @@
 import serial, sys, time
-#You wil need to change the below line based on your OS and base station device
-serialPort = "/dev/ttyACM0"
-#------------------------------------------------------------------------------
+serialPort = sys.argv[1]
 curFile = -1
 f = None
 print("LoRa Image RX Utility v1.0")
